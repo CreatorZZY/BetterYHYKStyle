@@ -46,13 +46,37 @@
 
     GM_addStyle(customStyle);
 
-    setInterval(function () {
-        if (document.querySelector("section.el-drawer__body>div>div:nth-child(1)>div>div.explain>div.top>span:nth-child(1)>span") == undefined) {
-            if (document.querySelector("section.el-drawer__body>div>div:nth-child(1)>div>div:nth-child(2)") != undefined)
-                document.querySelector("section.el-drawer__body>div>div:nth-child(1)>div>div:nth-child(2)").style.backgroundColor = "#ffffff"
+    const Selectors = {
+        appRoot: "section.el-drawer__body",
+        targetDiv: "section.el-drawer__body>div>div:nth-child(1)>div>div:nth-child(2)",
+        span1: "section.el-drawer__body>div>div:nth-child(1)>div>div.explain>div.top>span:nth-child(1)>span",
+        span2: "section.el-drawer__body>div>div:nth-child(1)>div>div.explain>div.top>span:nth-child(2)>span"
+    };
+
+    function checkAnswer() {
+        const targetEl = document.querySelector(Selectors.targetDiv);
+        if (!targetEl) return;
+
+        const span1 = document.querySelector(Selectors.span1);
+        const span2 = document.querySelector(Selectors.span2);
+        if (!span1 || !span2) {
+            targetEl.style.backgroundColor = "#ffffff";
         }
-        else if (document.querySelector("section.el-drawer__body>div>div:nth-child(1)>div>div.explain>div.top>span:nth-child(1)>span").innerText === document.querySelector("section.el-drawer__body>div>div:nth-child(1)>div>div.explain>div.top>span:nth-child(2)>span").innerText) { document.querySelector("section.el-drawer__body>div>div:nth-child(1)>div>div:nth-child(2)").style.backgroundColor = "#DAF7DB" }
-        else { document.querySelector("section.el-drawer__body>div>div:nth-child(1)>div>div:nth-child(2)").style.backgroundColor = "#f7dcda" }
-    }, 1000)
+        else if (span1.innerText === span2.innerText) {
+            targetEl.style.backgroundColor = "#DAF7DB";
+        }
+        else {
+            targetEl.style.backgroundColor = "#f7dcda";
+        }
+    }
+    const observer2 = new MutationObserver((mutationsList, observer) => {
+        checkAnswer();
+    });
+    observer2.observe(document.querySelector(document.body), {
+        childList: true,
+        subtree: true,
+        characterData: true
+    });
+    checkAnswer();
     
 })();
