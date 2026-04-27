@@ -72,7 +72,7 @@
     const observer2 = new MutationObserver((mutationsList, observer) => {
         checkAnswer();
     });
-    observer2.observe(document.querySelector(document.body), {
+    observer2.observe(document.body, {
         childList: true,
         subtree: true,
         characterData: true
