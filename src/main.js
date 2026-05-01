@@ -71,6 +71,7 @@
 
         if(
             document.querySelector("#app > div > div.ele-admin-main > div.ele-admin-body > div.ele-admin-content > div.ele-admin-content-view > div > div.el-card.is-never-shadow > div > div:nth-child(1) > form > div:nth-child(1) > div > div > div > input") != undefined &&
+                document.querySelector("body > div.el-select-dropdown.el-popper") != undefined &&
                 document.querySelector("#app > div > div.ele-admin-main > div.ele-admin-body > div.ele-admin-content > div.ele-admin-content-view > div > div.el-card.is-never-shadow > div > div:nth-child(1) > form > div:nth-child(1) > div > div > div > input").value != "快刷模式"
         ) {
             if (document.querySelector("body > div.el-select-dropdown.el-popper").getAttribute("x-placement") == undefined)
